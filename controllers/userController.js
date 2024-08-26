@@ -2,8 +2,13 @@ const userModel = require('../models/userModel');
 
 function createUser(req, res) {
     const { name, email } = req.body;
+    if(name && email){
     const user = userModel.addUser(name, email);
     res.status(201).json(user);
+    }
+    else
+    res.status(400).json({ message: 'One of the user entity fields is empty' });
+
 }
 
 function getAllUsers(req, res) {

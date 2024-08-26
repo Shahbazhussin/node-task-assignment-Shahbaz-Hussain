@@ -2,8 +2,14 @@ const blogModel = require('../models/blogModel');
 
 function createBlog(req, res) {
     const { title, content, userId } = req.body;
+    if(title && content && userId){
     const blog = blogModel.addBlog(title, content, userId);
     res.status(201).json(blog);
+
+    }
+    else
+    res.status(400).json({ message: 'One of the blog entity fields is empty' });
+
 }
 
 function getAllBlogs(req, res) {
